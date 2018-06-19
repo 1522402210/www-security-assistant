@@ -353,6 +353,14 @@ To test this configuration we can simulate DDOS attack via the `F5` method, ment
 
 ### Check-up
 
+- if you enabled the base rules, try to access ([source](https://gist.github.com/davidrios/424583df2ac768675330)):
+
+  ````apache
+  http://<YOUR_HOST>/?param='; drop database test; --
+  ````
+
+  You should see entries in /var/log/apache2/error.log and /var/log/apache2/modsec_audit.log.
+
 - Create an additional configuration file in `/etc/modsecurity`, call it for example `z-customrules.conf`, and add the following rule as its content:
 
   ````apache
