@@ -61,15 +61,15 @@
         </LocationMatch>
 
         # --- Create REQUEST_URI words blacklist -------
-        #
         # Increase Request Entity for example.com/wp-admin/post.php
-        #
         # Alternatively these values could be changed globally globallyin /etc/modsecurity/modsecurity.conf
 
         <LocationMatch /wp-admin/post.php>
-                SecRequestBodyLimit 131072000
-                SecRequestBodyNoFilesLimit 1310720
-                SecRequestBodyInMemoryLimit 1310720
+		<IfModule security2_module>
+                	SecRequestBodyLimit 131072000
+                	SecRequestBodyNoFilesLimit 1310720
+                	SecRequestBodyInMemoryLimit 1310720
+		</IfModule>
         </LocationMatch>
 
     </VirtualHost>
