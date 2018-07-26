@@ -414,7 +414,7 @@ In Ubuntu 16.04 you can install CSR 2.x: `apt install modsecurity-crs`. More det
 - Clone CSR in the folder `/usr/share/modsecurity-crs.3`:
 
       sudo git clone https://github.com/SpiderLabs/owasp-modsecurity-crs /usr/share/modsecurity-crs.3
-      /usr/share/modsecurity-crs.3/util/upgrade.py --geoip --crs
+      sudo /usr/share/modsecurity-crs.3/util/upgrade.py --geoip --crs
 
 - Upgrade and auto renew the GeoIP database. (The GeoIP DB is no longer included with the CRS. Instead you are advised to download it regularly.) The script `util/upgrade.py` brings this functionality. You can use it as follows in cron - `sudo crontab -e`:
 
