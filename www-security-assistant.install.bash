@@ -375,7 +375,7 @@ echo 'sudo iptables -P INPUT DROP'
 echo 'sudo iptables -P OUTPUT ACCEPT'
 echo
 echo -e "\n${GRE}# Test from outside:${NCL}"
-echo -e "${GRE}# nmap -p 1-20000 185.80.1.209${NCL}"
+echo -e "${GRE}# nmap -p 1-20000 10.10.1.101${NCL}"
 echo
 echo -e "\n${GRE}# Save and Restore !!! (Tweak the content of the files.)\n${RED}# Be really careful before apply this step !\n# This may lock you out of the system !${NCL}\n"
 echo "sudo ln -s ${WORK_DIR}/iptables-save.sh /etc/network/if-post-down.d/iptables-save"
