@@ -11,6 +11,7 @@ SOURCE_FILES+=('iptables-restore.sh')
 SOURCE_FILES+=('modsecurity-uri-black.list.example')
 SOURCE_FILES+=('modsecurity-ip-white.list.example')
 SOURCE_FILES+=('www-security-assistant.conf.example')
+SOURCE_FILES+=('www-security-assistant.install.bash')
 
 # List of brances that this script can handle
 AVAILABLE_BRANCHES=("master" "stable.v.1")
