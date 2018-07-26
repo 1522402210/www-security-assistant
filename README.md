@@ -133,7 +133,7 @@ sudo ./www-security-assistant.install.bash
 
 - Represent yourself as `$AGENT` and check whether the Automatic MODE works properly:
 
-      www-security-assistant.bash 192.168.1.177 Guardian
+      www-security-assistant.bash 192.168.1.101 Guardian
 
   Then check your e-mail, type `iptables -L GUARDIAN -n`, review the files `www-security-assistant.history` and `www-security-assistant.mail`. Run the above command 5 times and review the files `iptables-DROP.list` and `iptables-CURRENT.conf`.
 
