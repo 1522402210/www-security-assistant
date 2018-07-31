@@ -19,6 +19,8 @@ The current project covers the following topics, that are involved into a comple
 - [ModSecurity GuardianLog ► HTTPD Custom Analyze ► WSAS ► Iptables](#modsecguardianlog--httpd-custom-analyze--wsas--iptables)
 - [HTTPS and Common Apache Security Tips](#https-and-common-apache-security-tips)
 
+- To be added: [Integrating with ClamAV](https://www.feistyduck.com/library/modsecurity-handbook-free/online/ch04-logging.html)
+
 ## WWW Security Assistant Script ► Iptables
 
 Here is presented the script [**`www-security-assistant.bash`**][2]. It could help you with the handling of the malicious IP addresses. The script has two modes.
