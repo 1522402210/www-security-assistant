@@ -61,4 +61,4 @@ EMAIL_BODY="$WORK_DIR/www-security-assistant.mail"
 
 # Set the content of the frequent used messages, touch some files with attention to create them in case they do not exist
 USAGE="Usage: <IP> [ ModSecurity | ModEvasive | Guardian | a2Analyst ] or [ --DROP 'log notes' | --DROP-CLEAR 'log notes' | --ACCEPT 'log notes' | --ACCEPT-CHAIN 'log notes' ]"
-UNBLOCK="Unblock: sudo iptables -D GUARDIAN -s $IP -j DROP | sudo www-security-assistant.bash $IP --DROP-CLEAR 'log notes'" 
+UNBLOCK="\n\t sudo iptables -D GUARDIAN -s $IP -j DROP \n\t sudo www-security-assistant.bash $IP --DROP-CLEAR 'log notes'"
