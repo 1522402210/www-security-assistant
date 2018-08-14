@@ -175,7 +175,7 @@ else
     printf '\nThey reached our Limit of tolerance, currently equal to %s transgressions, and were added to the BAN List!\n' "$LIMIT" >> $EMAIL_BODY
     printf '\n<!-- WHOIS %s report begin:\n\n' "$IP" >> $EMAIL_BODY; whois "$IP" >> "$EMAIL_BODY"; printf '\nWHOIS %s report end. -->\n' "$IP" >> "$EMAIL_BODY"
 fi
-    printf '\nTo allow access to this IP address manually: %s \n' "$UNBLOCK" >> $EMAIL_BODY
+    printf '\nTo allow access to this IP address manually: %b\n' "$UNBLOCK" >> $EMAIL_BODY
     printf '\n---===| %s Security Assistant |===---\n' "${HOSTNAME^^}" >> $EMAIL_BODY
 
 # Send the E-MAIL
