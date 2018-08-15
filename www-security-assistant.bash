@@ -83,7 +83,7 @@ elif [ "$AGENT" == "--DROP" ]; then
     iptables -L GUARDIAN -n --line-numbers
     eval "$IPTABLES_SAVE"
     # Output and Log a message and exit
-    printf 'On %-10s at %-8s | This IP/CIDR was added to the DROP (BAN) List by @%s: %-18s \t| Notes: %s %s\n' "$DATE" "$TIME" "$RUN_USER" "$IP" "$NOTES" "$UNBLOCK" | tee -a "$BAN_LIST"
+    printf 'On %-10s at %-8s | This IP/CIDR was added to the DROP (BAN) List by @%s: %-18s \t| Notes: %s\n' "$DATE" "$TIME" "$RUN_USER" "$IP" "$NOTES" | tee -a "$BAN_LIST"
     exit 0
 
 # Remove $IP from the DROP (BAN) List, syntax: www-security-assistant.bash <IP> --DROP-CLEAR 'log notes'"
@@ -137,7 +137,7 @@ elif [[ " ${AGENTS[@]} " == *" ${AGENT} "* ]]; then
         # The $NOTES are not logged here, this will be done within the following section: Log the current thread
         iptables -A GUARDIAN -s "$IP" -j DROP
         eval "$IPTABLES_SAVE"
-        printf 'On %-10s at %-8s | This IP/CIDR was added to the DROP (BAN) List by @%s: %-18s \t| Notes: %s\n' "$DATE" "$TIME" "$AGENT" "$IP" "$UNBLOCK" | tee -a "$BAN_LIST"
+        printf 'On %-10s at %-8s | This IP/CIDR was added to the DROP (BAN) List by @%s: %-18s\n' "$DATE" "$TIME" "$AGENT" "$IP" | tee -a "$BAN_LIST"
         # GO FORWARD
 
     fi
