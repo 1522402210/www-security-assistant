@@ -69,7 +69,7 @@ printf "\n\n***** SECURITY LOG from %s on %s : www-security-assistant.bash : %s 
 
 ## The ACTION SECTION
 
-# If the $IP is a member of the $WHITE_LIST
+# If the $IP is a member of the $WHITE_LIST (grep -q "$IP" "$WHITE_LIST" - doesn't work)
 if [[ ! -z $(grep -o "$IP" "$WHITE_LIST") ]]; then
 
     # Output a message and exit
@@ -90,10 +90,10 @@ elif [ "$AGENT" == "--DROP" ]; then
 elif [ "$AGENT" == "--DROP-CLEAR" ]; then
 
     iptables -L GUARDIAN -n --line-numbers; echo
-    sed -i "/$IP/d" $HISTORY
-    sed -i "/$IP/d" $BAN_LIST
+    sed -i "/$IP/d" "$HISTORY"
+    sed -i "/$IP/d" "$BAN_LIST"
     iptables -D GUARDIAN -s "$IP" -j DROP
-    eval "$IPTABLES_SAVE"; echo 
+    eval "$IPTABLES_SAVE"; echo
     iptables -L GUARDIAN -n --line-numbers; echo
     # Output and Log a message and exit
     printf 'On %-10s at %-8s | This IP/CIDR was removed from the DROP (BAN) List by @%s: %-18s \t| Notes: %s\n' "$DATE" "$TIME" "$RUN_USER" "$IP" "$NOTES" | tee -a "$BAN_CLEAR_LIST"
@@ -119,8 +119,8 @@ elif [ "$AGENT" == "--ACCEPT-CHAIN" ]; then
 
 # If the $AGENT belogs to the list of $AGENTS
 elif [[ " ${AGENTS[@]} " == *" ${AGENT} "* ]]; then
-    # Get the number of the previous transgressions from this $IP and increment +1 to get the current number; 
-    # Note `$(grep -c $IP $HISTORY)` sometimes works sometime doesn't work.
+    # Get the number of the previous transgressions from this $IP and increment +1 to get the current number;
+    # Note '$(grep -c $IP $HISTORY)' sometimes works sometime doesn`t work '!!!'
     IP_SINS=$(cat "$HISTORY" | grep "$IP" | wc -l); IP_SINS=$((IP_SINS+1))
 
     if [ ! "$IP_SINS" -ge "$LIMIT" ]; then
@@ -160,31 +160,36 @@ printf 'On %-10s at %-8s | %-12s : %-18s | Notes: %s\n' "$DATE" "$TIME" "$AGENT"
 
 ## The Construct E-MAIL SECTION
 
-    printf '\n---===| %s Security Assistant |===---\n' "${HOSTNAME^^}" > $EMAIL_BODY
-    printf '\n%s:\n' "$AGENT" >> $EMAIL_BODY
+{
+    printf '\n---===| %s Security Assistant |===---\n' "${HOSTNAME^^}"
+    printf '\n%s:\n' "$AGENT"
 if [[ $AGENT == "ModSecurity" ]]; then
-    printf '\nNew transgression has been detected from this source IP address: %s\n\n' "$IP" >> $EMAIL_BODY
-    echo "${NOTES_EMAIL}" >> $EMAIL_BODY
+    printf '\nNew transgression has been detected from this source IP address: %s\n\n' "$IP"
+    echo "${NOTES_EMAIL}"
 else
-    printf '\nMassive connections has been detected from this source IP address: %s\n' "$IP" >> $EMAIL_BODY
+    printf '\nMassive connections has been detected from this source IP address: %s\n' "$IP"
 fi
-    printf '\nThe current number of committed transgressions from this IP is %s.\n' "$IP_SINS" >> $EMAIL_BODY
+    printf '\nThe current number of committed transgressions from this IP is %s.\n' "$IP_SINS"
 if [ ! "$IP_SINS" -ge "$LIMIT" ]; then
-    printf '\nThe system has blocked the IP in the firewall for %s as from %s on %s.\n' "$BAN_TIME" "$TIME" "$DATE" >> $EMAIL_BODY
+    printf '\nThe system has blocked the IP in the firewall for %s as from %s on %s.\n' "$BAN_TIME" "$TIME" "$DATE"
 else
-    printf '\nThey reached our Limit of tolerance, currently equal to %s transgressions, and were added to the BAN List!\n' "$LIMIT" >> $EMAIL_BODY
-    printf '\n<!-- WHOIS %s report begin:\n\n' "$IP" >> $EMAIL_BODY; whois "$IP" >> "$EMAIL_BODY"; printf '\nWHOIS %s report end. -->\n' "$IP" >> "$EMAIL_BODY"
+    printf '\nThey reached our Limit of tolerance, currently equal to %s transgressions, and were added to the BAN List!\n' "$LIMIT"
+    printf '\n<!-- WHOIS %s report begin:\n\n' "$IP"; whois "$IP"; printf '\nWHOIS %s report end. -->\n' "$IP"
 fi
-    printf '\nTo allow access to this IP address manually: %b\n' "$UNBLOCK" >> $EMAIL_BODY
-    printf '\n---===| %s Security Assistant |===---\n' "${HOSTNAME^^}" >> $EMAIL_BODY
+    printf '\nTo allow access to this IP address manually: %b\n' "$UNBLOCK"
+    printf "\nTo whitelist similar actions execute:\n\tsudo modsec_white-list-rule-generator '999xxx' 'unique-id' '%s'\n" "$(echo "$NOTES_EMAIL" | sed -r -n 's/^Unique ID: (.*)$/\1/p')"
+    printf '\n---===| %s Security Assistant |===---\n' "${HOSTNAME^^}"
+} > "$EMAIL_BODY"
+
+
 
 # Send the E-MAIL
-cat "$EMAIL_BODY" | mail -r "$EMAIL_FROM" -s "Attack Detected - ${HOSTNAME^^}" "$EMAIL_TO"
+mail -r "$EMAIL_FROM" -s "Attack Detected - ${HOSTNAME^^}" "$EMAIL_TO" < "$EMAIL_BODY"
 
 # Remove ModEvasive lock file for future checks
-if [ "$AGENT" == "ModEvasive" ]; then rm -f "$EVASIVE_LOG/dos-$IP"; fi
+if [[ $AGENT == 'ModEvasive' ]]; then rm -f "$EVASIVE_LOG/dos-$IP"; fi
 
 # Add clarification to the copy of the last sent email
-printf '\n***\n This email has been sent to %s at %s\n\n' "$EMAIL_TO" "$TIME" >> $EMAIL_BODY
+printf '\n***\n This email has been sent to %s at %s\n\n' "$EMAIL_TO" "$TIME" >> "$EMAIL_BODY"
 
 exit 0

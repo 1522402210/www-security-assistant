@@ -353,6 +353,8 @@ To test this configuration we can simulate DDOS attack via the `F5` method, ment
 
 - Restart Apache: `sudo systemctl restart apache2.service`.
 
+- To force the `logrotate` use the command: `sudo logrotate --force /etc/logrotate.d/apache2-modsec`
+
 ### Check-up
 
 - if you enabled the base rules, try to access ([source](https://gist.github.com/davidrios/424583df2ac768675330)):

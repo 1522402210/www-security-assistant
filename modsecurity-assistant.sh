@@ -40,6 +40,5 @@ REQUEST_URI="$(echo ${REQUEST_URI} | sed -e 's/0/О/g' -e 's/p/р/g' -e 's/P/Р/
 ATTACK_INFO="Attacking IP: ${REMOTE_ADDR}${MY_DIVIDER}Attack. host: ${REMOTE_HOST}${MY_DIVIDER}Unique ID: ${UNIQUE_ID}${MY_DIVIDER}Our Server: ${SERVER_NAME}${MY_DIVIDER}Request URI: ${REQUEST_URI}${MY_DIVIDER}Arguments: ${ARGS}"
 
 # Call WWW Security Assistant Script
-exec sudo "$SEC_ASSISTANT" "$REMOTE_ADDR" 'ModSecurity' "$ATTACK_INFO" >> "$EXEC_LOG" 2>&1
-
+exec sudo "$SEC_ASSISTANT" "$REMOTE_ADDR" 'ModSecurity' "$ATTACK_INFO" >> "$EXEC_LOG" 2>&1 &
 exit 0
