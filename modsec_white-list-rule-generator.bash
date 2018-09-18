@@ -79,7 +79,7 @@ script_variables() {
 #
 # The Main Section -----
 
-[[ -z ${1+x} ]] && RULE_NUMBER='99999' || RULE_NUMBER="$1"
+[[ -z ${1+x} ]] && RULE_NUMBER='999999' || RULE_NUMBER="$1"
 [[ -z ${2+x} ]] && ANALYSIS_TYPE='latest-log' || ANALYSIS_TYPE="$2"
 [[ -z ${3+x} ]] && UNIQUE_ID='The Unique ID must be 27 characters long!' || UNIQUE_ID="$3"
 
