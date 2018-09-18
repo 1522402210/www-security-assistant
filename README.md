@@ -401,6 +401,7 @@ To test this configuration we can simulate DDOS attack via the `F5` method, ment
 
 ### References
 
+- [**Processing phases of Modsecurity**][71]
 - [ModSecurity HandBook by Ivan Ristic][25]
 - [**ModSecurity 2.5** by Mischel Magnus][26]
 - [10 ways to improove your protection with ModSecurity][27]
@@ -846,3 +847,4 @@ See also:
   [68]: https://askubuntu.com/a/903375/566421
   [69]: https://askubuntu.com/a/873876/566421
   [70]: https://www.owasp.org/index.php/Testing_for_SQL_Injection_(OTG-INPVAL-005)
+  [71]: https://malware.expert/modsecurity/processing-phases-modsecurity/
