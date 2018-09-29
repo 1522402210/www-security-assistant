@@ -272,14 +272,14 @@ Here we will configure `mod_evasive` to talk to `iptables` through the `www-secu
 
       #DOSEmailNotify     your@email.foo
       DOSLogDir           "/var/log/apache2_mod_evasive"
-      DOSSystemCommand    "sudo /var/www-security-assistant/www-security-assistant.bash %s 'ModEvasive' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.execlog 2>&1"
+      DOSSystemCommand    "sudo /var/www-security-assistant/www-security-assistant.bash %s 'ModEvasive' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.exec.log 2>&1"
   </IfModule>
   ````
 
 - Create log file and Restart the Apache server:
 
   ````bash
-  sudo touch /var/www-security-assistant/www-security-assistant.execlog && sudo chown www-data /var/www-security-assistant/www-security-assistant.execlog
+  sudo touch /var/www-security-assistant/www-security-assistant.exec.log && sudo chown www-data /var/www-security-assistant/www-security-assistant.exec.log
   sudo systemctl restart apache2.service
   ````
 
@@ -699,7 +699,7 @@ sudo chmod +x /var/www-security-assistant/httpd-guardian.pl
 Modify the following variables to call our WSAS script (note this is already made in this redistributed version):
 
 ````perl
-my $PROTECT_EXEC = "exec /var/www-security-assistant/www-security-assistant.bash %s 'Guardian' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.execlog 2>&1";
+my $PROTECT_EXEC = "exec /var/www-security-assistant/www-security-assistant.bash %s 'Guardian' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.exec.log 2>&1";
 my $THRESHOLD_1MIN = 3; # 120 requests in a minute
 my $THRESHOLD_5MIN = 2; # 360 requests in 5 minutes
 my $COPY_LOG = "/var/log/apache2_mod_security/modsec_guardian.httpdguardian.log";
@@ -718,7 +718,7 @@ SecGuardianLog "|/var/www-security-assistant/httpd-guardian.pl"
 To test the script disable ModEvasive (`sudo a2dismod evasive` don't forget to enable it later) and restart Apache. Then `tail` the exec log:
 
 ````bash
-tail -F /var/www-security-assistant/www-security-assistant.execlog
+tail -F /var/www-security-assistant/www-security-assistant.exec.log
 ````
 
 And from another instance perform DoS attack, for example use `ab` in this way:

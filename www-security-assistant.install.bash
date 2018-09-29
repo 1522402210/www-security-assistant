@@ -133,9 +133,9 @@ rm /usr/local/bin/www-security-assistant.bash >/dev/null 2>&1
 ln -s "${WORK_DIR}/www-security-assistant.bash" /usr/local/bin/
 echo -ne "\n\n${GRE}## The file: ${YEL}/usr/local/bin/www-security-assistant.bash${NCL} is created!\n"
 
-touch "${WORK_DIR}/www-security-assistant.execlog"
-chown www-data "${WORK_DIR}/www-security-assistant.execlog"
-echo -ne "\n\n${GRE}## The file: ${YEL}${WORK_DIR}/www-security-assistant.execlog${NCL} is created!\n"
+touch "${WORK_DIR}/www-security-assistant.exec.log"
+chown www-data "${WORK_DIR}/www-security-assistant.exec.log"
+echo -ne "\n\n${GRE}## The file: ${YEL}${WORK_DIR}/www-security-assistant.exec.log${NCL} is created!\n"
 
 echo 'www-data ALL=(ALL) NOPASSWD: /var/www-security-assistant/www-security-assistant.bash' > '/etc/sudoers.d/www-security-assistant'
 echo -ne "\n\n${GRE}## The file: ${YEL}/etc/sudoers.d/www-security-assistant${NCL} is created!\n"

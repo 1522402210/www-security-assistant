@@ -94,7 +94,7 @@ while read LOGLINE; do                                                          
                                         #echo "/sbin/iptables -D GUARDIAN -s $IP -j DROP" | at now + "$BAN_TIME" # Unblock offending IP after $BAN_TIME through the `at` command
 
                                         ## ACTION RULES: call external script:
-                                        ( exec /var/www-security-assistant/www-security-assistant.bash "$IP" 'a2Analyst' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.execlog 2>&1 )
+                                        ( exec "/var/www-security-assistant/www-security-assistant.bash" "$IP" 'a2Analyst' 'AutoMode' >> "/var/www-security-assistant/www-security-assistant.exec.log" 2>&1 )
                                 fi
                         fi
                 fi

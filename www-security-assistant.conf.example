@@ -31,8 +31,9 @@ BAN_TIME="5 minutes"
 # Limit of tolerance of transgressions from certain IP
 LIMIT="10"
 
-# This value is used within the comunication between 'modsecurity-assistant.sh' and 'www-security-assistant.bash'
+# This value is used within the comunication between 'modsecurity-assistant.sh'/'syn-flood-detector.bash' and 'www-security-assistant.bash'
 # This solves an old issue and it is not longer needed - but why not :)
+# Note you should use the same format: with dash/minus in the beginning and the end of the string
 MY_DIVIDER='-DiViDeR-d1v1d3r-'
 
 # The log directory mentioned in /etc/apache2/envvars
@@ -45,7 +46,7 @@ EVASIVE_LOG="/var/log/apache2_mod_evasive"
 SECURITY_LOG="/var/log/apache2_mod_security2"
 
 # Set the list of the available Agents in tha Automatic mode
-AGENTS=("Guardian" "ModSecurity" "ModEvasive" "a2Analyst")
+AGENTS=("Guardian" "ModSecurity" "ModEvasive" "a2Analyst" "SynDetector")
 
 # In the white-list put at least your server's IP and localhost IP 127.0.0.1
 WHITE_LIST="$WORK_DIR/iptables-ACCEPT.list"
@@ -59,6 +60,5 @@ HISTORY="$WORK_DIR/www-security-assistant.history"
 # it contains the content of the last email sent by the script
 EMAIL_BODY="$WORK_DIR/www-security-assistant.mail"
 
-# Set the content of the frequent used messages, touch some files with attention to create them in case they do not exist
-USAGE="Usage: <IP> [ ModSecurity | ModEvasive | Guardian | a2Analyst ] or [ --DROP 'log notes' | --DROP-CLEAR 'log notes' | --ACCEPT 'log notes' | --ACCEPT-CHAIN 'log notes' ]"
-UNBLOCK="\n\t sudo iptables -D GUARDIAN -s $IP -j DROP \n\t sudo www-security-assistant.bash $IP --DROP-CLEAR 'log notes'"
+# Set the content of the frequent used messages
+USAGE="Usage: <IP> [ ModSecurity | ModEvasive 'notes' | Guardian | a2Analyst | SynDetector 'notes' ] or [ --DROP 'log notes' | --DROP-CLEAR 'log notes' | --ACCEPT 'log notes' | --ACCEPT-CHAIN 'log notes' ]"

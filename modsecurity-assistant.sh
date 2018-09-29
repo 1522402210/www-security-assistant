@@ -26,7 +26,7 @@ SEC_ASSISTANT="${WORK_DIR}/www-security-assistant.bash"
 
 ## Set th environment variables
 CONF_FILE="${WORK_DIR}/www-security-assistant.conf"
-EXEC_LOG="${WORK_DIR}/www-security-assistant.execlog"
+EXEC_LOG="${WORK_DIR}/www-security-assistant.exec.log"
 MY_DIVIDER="$(grep '^MY_DIVIDER' "$CONF_FILE" | sed -r "s/^MY_DIVIDER='(-.*-)'.*$/\1/")"
 
 ## Output a log header

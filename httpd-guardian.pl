@@ -110,7 +110,7 @@
 #
 #     To configure this script to work with 'www-security-assistant.bash':
 #
-my $PROTECT_EXEC = "exec /var/www-security-assistant/www-security-assistant.bash %s 'Guardian' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.execlog 2>&1";
+my $PROTECT_EXEC = "exec /var/www-security-assistant/www-security-assistant.bash %s 'Guardian' 'AutoMode' >> /var/www-security-assistant/www-security-assistant.exec.log 2>&1";
 my $THRESHOLD_1MIN = 3; # 120 requests in a minute
 my $THRESHOLD_5MIN = 2; # 360 requests in 5 minutes
 my $COPY_LOG = "/var/log/apache2_mod_security/modsec_guardian.httpdguardian.log";
