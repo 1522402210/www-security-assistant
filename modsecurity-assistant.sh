@@ -2,7 +2,7 @@
 
 # Name:    modsecurity-assistant.sh - example port between ModSecurity and WWWSecurityAssistant.
 # Summary: Custom script designed to handle data from ModSecurity throug the 'exec' action.
-# Home:    https://github.com/pa4080/security-assistant
+# Home:    https://github.com/pa4080/www-security-assistant
 # Author:  Spas Z. Spasov <spas.z.spasov@gmail.com> (C) 2018
 # Default: The default work directory is '/var/www-security-assistant' (see below).
 #          If you are going to change this value, do it for the entire script bundle.

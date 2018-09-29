@@ -4,7 +4,7 @@
 # Summary: Custom script designed to help you with malicious IP addresses handling.
 #          The IPs should be provided by external programs 
 #          such as ModSecurity or ModEvasive for Apache web server.
-# Home:    https://github.com/pa4080/security-assistant
+# Home:    https://github.com/pa4080/www-security-assistant
 # Author:  Spas Z. Spasov <spas.z.spasov@gmail.com> (C) 2018
 # Default: The default work directory is '/var/www-security-assistant' (see below).
 #          If you are going to change this value, do it for the entire script bundle.

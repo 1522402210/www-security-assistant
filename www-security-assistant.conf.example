@@ -3,7 +3,7 @@
 # Name:    www-security-assistant.conf.example - the default configuration file of the script bundle WWWSecurityAssistant.
 # Summary: This file is sourced You should create your own configuration file by removing of the '.example' extension.
 #          When 'www-security-assistant.conf' exist it will be sourced in 'www-security-assistant.bash'.
-# Home:    https://github.com/pa4080/security-assistant
+# Home:    https://github.com/pa4080/www-security-assistant
 # Author:  Spas Z. Spasov <spas.z.spasov@gmail.com> (C) 2018
 # Default: The default work directory is '/var/www-security-assistant' (see below).
 #          If you are going to change this value, do it for the entire script bundle.

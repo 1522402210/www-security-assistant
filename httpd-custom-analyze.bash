@@ -3,7 +3,7 @@
 # Name:    httpd-custom-analyze.bash - example port between Apache's logging mechanism and WWWSecurityAssistant.
 # Summary: Custom script designed to analyze Apache's web server requests 
 #          through the piped logging mechanism (especially of modsec_guardian.log).
-# Home:    https://github.com/pa4080/security-assistant
+# Home:    https://github.com/pa4080/www-security-assistant
 # Author:  Spas Z. Spasov <spas.z.spasov@gmail.com> (C) 2018
 # Default: The default work directory is '/var/www-security-assistant' (see below).
 #          If you are going to change this value, do it for the entire script bundle.

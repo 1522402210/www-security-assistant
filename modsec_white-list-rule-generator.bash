@@ -25,7 +25,7 @@ get_info() {
 	REFERER_URL="$(sed -r -n 's/^Referer: (http.*)$/\1/p' "$TMP_FILE")"
 
 	REQUEST_URI="$(sed -r -n 's/^(GET|POST|PUT|HEAD|DELETE|PATCH|OPTIONS) (.*) (HTTP.*)$/\2/p' "$TMP_FILE")"
-	REQUEST_URI_FILTRED="$(echo "$REQUEST_URI" | sed -r -e 's/\?/\\\?/g' -e 's/post=[0-9]+/post=\[0-9\]\+/g' -e 's/deleted=[0-9]+/deleted=\[0-9\]\+/g' -e 's/message=[0-9]+/message=\[0-9\]\+/g')"
+	REQUEST_URI_FILTRED="$(echo "$REQUEST_URI" | sed -r -e 's/\?/\\\?/g' -e 's/=[0-9]+/=\[0-9\]\+/g')"
 
 	COOKIE="$(sed -n -r 's/^Cookie: (.*)/\1/p' "$TMP_FILE")"
 
@@ -60,6 +60,7 @@ rule_body() {
 
 edit_rules_and_rload_apache2() {
 	read -p "Press [Enter] to continue, press [Ctrl+C] to cancel..."
+	cp /usr/share/modsecurity-crs.3/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf{,.bak}
 	nano /usr/share/modsecurity-crs.3/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
 	systemctl reload apache2.service; echo; systemctl status apache2.service
 }
@@ -104,6 +105,3 @@ rule_info
 rule_body
 echo; echo -e "${NCL}"
 edit_rules_and_rload_apache2
-
-
-
