@@ -17,9 +17,12 @@ HOSTNAME=$(hostname -f)
 # Or just enter <email@example.com>
 EMAIL_FROM="Security Assistant <root@$HOSTNAME>"
 
-# Multiple accounts separated by commas are allowed: 
-# EMAIL_TO="your@email.foo, your@email.bar, your@email.baz"
-EMAIL_TO="$RUN_USER@$HOSTNAME"
+# Multiple accounts separated by commas are allowed:
+# EMAIL_TO="your@email.foo, your@email.bar, your@email.baz" - the emails sent to these boxes will be HTML formatted
+# EMAIL_TO_PLAIN="root@localhost, foo@localhost" - the emails sent to these boxes will be plain text
+# If none of these variables is set, script execution will be disconnected before the email section
+EMAIL_TO="admin@$HOSTNAME"
+EMAIL_TO_PLAIN="root@localhost"
 
 # Here is used additional script as iptables save command: https://www.cyberciti.biz/faq/iptables-read-and-block-ips-subnets-from-text-file/
 # It can be replaced with something as its content: iptables-save > /var/www-security-assistant/iptables-CURRENT.conf
@@ -56,9 +59,12 @@ BAN_CLEAR_LIST="$WORK_DIR/iptables-DROP-CLEAR.list"
 # Please be careful when manipulate this file manually
 HISTORY="$WORK_DIR/www-security-assistant.history"
 
-# This file will exists until next thread,
-# it contains the content of the last email sent by the script
+# This file will exists until next thread, it contains the content of the last email sent by the script
 EMAIL_BODY="$WORK_DIR/www-security-assistant.mail"
+EMAIL_BODY_PLAIN="$WORK_DIR/www-security-assistant.mail.plain"
 
 # Set the content of the frequent used messages
 USAGE="Usage: <IP> [ ModSecurity | ModEvasive 'notes' | Guardian | a2Analyst | SynDetector 'notes' ] or [ --DROP 'log notes' | --DROP-CLEAR 'log notes' | --ACCEPT 'log notes' | --ACCEPT-CHAIN 'log notes' ]"
+
+# Error log
+ERROR_LOG="$WORK_DIR/www-security-assistant.error.log"

@@ -9,6 +9,8 @@
 
 * The script `modsec_white-list-rule-generator.bash` is added
 * The script `syn-flood-detector.bash` is added
+* Handling some error messages and undeterminated behaviour.
+* Send HTML and/or plain text emails.
 
 ## To do
 
